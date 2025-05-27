@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBay - Accedi o registrati</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .ebay-header {
+            background-color: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .ebay-logo {
+            width: 120px;
+            margin-left: 20px;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3665f3;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #767676;
+            font-size: 12px;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #e5e5e5;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            z-index: -1;
+        }
+        
+        .divider span {
+            background-color: #fff;
+            padding: 0 10px;
+        }
+        
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #fff;
+            color: #111;
+            border: 1px solid #111;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #767676;
+            margin-top: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="ebay-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg" alt="eBay Logo" class="ebay-logo">
+    </header>
+    
+    <div class="login-container">
+        <h1 class="login-title">Accedi o registrati</h1>
+        
+        <form>
+            <input type="text" placeholder="Indirizzo email o nome utente" class="input-field" required>
+            <input type="password" placeholder="Password" class="input-field" required>
+            
+            <button type="submit" class="continue-btn">Continua</button>
+            
+            <div class="divider">
+                <span>oppure</span>
+            </div>
+            
+            <button type="button" class="register-btn">Registrati</button>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <p>Copyright © 1995-2023 eBay Inc. Tutti i diritti riservati.</p>
+    </footer>
+</body>
+</html>
