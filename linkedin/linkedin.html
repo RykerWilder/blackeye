@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn - Accedi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f3f2ef;
+            color: rgba(0, 0, 0, 0.9);
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 408px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        /* Sezione sinistra */
+        .hero-section {
+            max-width: 520px;
+        }
+
+        .linkedin-logo {
+            width: 135px;
+            height: 34px;
+            margin-bottom: 32px;
+            background: #0077b5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 200;
+            color: #8f5849;
+            line-height: 1.25;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 24px;
+        }
+
+        /* Sezione login */
+        .login-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 32px;
+            width: 100%;
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 52px;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.15s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #0077b5;
+            box-shadow: 0 0 0 2px rgba(0, 119, 181, 0.2);
+        }
+
+        .form-input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #cc1016;
+        }
+
+        .error-message {
+            color: #cc1016;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-input:invalid:not(:focus):not(:placeholder-shown) + .error-message {
+            display: block;
+        }
+
+        .forgot-password {
+            color: #0077b5;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 52px;
+            background: #0077b5;
+            border: none;
+            border-radius: 28px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: all 0.15s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-button:hover {
+            background: #005885;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            background: #a0a0a0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .divider span {
+            margin: 0 16px;
+        }
+
+        .google-button {
+            width: 100%;
+            height: 52px;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            border-radius: 28px;
+            background: white;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+            margin-bottom: 24px;
+        }
+
+        .google-button:hover {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+            border-radius: 50%;
+        }
+
+        .signup-text {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .signup-link {
+            color: #0077b5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .login-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-section {
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .login-card {
+                padding: 24px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .login-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .login-card {
+                padding: 20px;
+            }
+        }
+
+        /* Animazioni */
+        .login-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-section {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideRight 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Loading state */
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading {
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <!-- Sezione Hero -->
+            <div class="hero-section">
+                <a href="#" class="linkedin-logo">LinkedIn</a>
+                <h1 class="hero-title">Benvenuto nella tua community professionale</h1>
+                <p class="hero-subtitle">Mantieni i contatti con la tua rete e continua a costruire la tua carriera.</p>
+            </div>
+
+            <!-- Card di Login -->
+            <div class="login-card">
+                <h2 class="login-title">Accedi</h2>
+                <p class="login-subtitle">Rimani aggiornato sul tuo mondo professionale</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="email">E-mail o telefono</label>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="email" 
+                            placeholder=""
+                            required
+                        >
+                        <div class="error-message">Inserisci un indirizzo e-mail valido.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="password" 
+                            placeholder=""
+                            minlength="6"
+                            required
+                        >
+                        <div class="error-message">La password deve contenere almeno 6 caratteri.</div>
+                    </div>
+
+                    <a href="#" class="forgot-password">Password dimenticata?</a>
+
+                    <button type="submit" class="login-button" id="loginBtn">
+                        Accedi
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>oppure</span>
+                </div>
+
+                <button class="google-button" onclick="simulateGoogleLogin()">
+                    <div class="google-icon"></div>
+                    Continua con Google
+                </button>
+
+                <div class="signup-text">
+                    Non hai ancora un account? 
+                    <a href="#" class="signup-link">Iscriviti ora</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestione del form di login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            if (email && password) {
+                // Mostra stato di caricamento
+                loginBtn.textContent = '';
+                loginBtn.classList.add('loading');
+                loginBtn.disabled = true;
+                
+                // Simula chiamata API
+                setTimeout(() => {
+                    alert('Login LinkedIn simulato con successo!\nEmail: ' + email);
+                    
+                    // Ripristina il pulsante
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Accedi';
+                    loginBtn.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // Simulazione login Google
+        function simulateGoogleLogin() {
+            const googleBtn = document.querySelector('.google-button');
+            const originalText = googleBtn.innerHTML;
+            
+            googleBtn.innerHTML = '<div class="google-icon"></div>Connessione in corso...';
+            googleBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Login Google simulato con successo!');
+                googleBtn.innerHTML = originalText;
+                googleBtn.disabled = false;
+            }, 1500);
+        }
+
+        // Validazione in tempo reale
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value && !this.checkValidity()) {
+                    this.style.borderColor = '#cc1016';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
+
+            input.addEventListener('input', function() {
+                if (this.checkValidity()) {
+                    this.style.borderColor = '';
+                }
+            });
+        });
+
+        // Effetti di animazione al caricamento
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.form-input').forEach((input, index) => {
+                    input.style.animation = `slideUp 0.4s ease ${0.1 * index}s forwards`;
+                });
+            }, 600);
+        });
+
+        // Effetto focus migliorato
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.2s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
