@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi ad Amazon</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        
+        .amazon-logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .amazon-logo img {
+            width: 120px;
+        }
+        
+        .login-container {
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 20px 26px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .login-title {
+            font-weight: 400;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 15px 0 5px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #a6a6a6;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #e77600;
+            box-shadow: 0 0 3px 2px rgba(228,121,17,.5);
+        }
+        
+        .continue-btn {
+            width: 100%;
+            background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+            border: 1px solid #a88734;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .continue-btn:hover {
+            background: linear-gradient(to bottom,#f5d78e,#eeb933);
+        }
+        
+        .legal-text {
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 15px 0;
+        }
+        
+        .help-link {
+            font-size: 13px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        
+        .help-link:hover {
+            text-decoration: underline;
+            color: #c45500;
+        }
+        
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+            color: #767676;
+            font-size: 12px;
+        }
+        
+        .divider::before {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #e7e7e7;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            z-index: -1;
+        }
+        
+        .divider span {
+            background-color: #fff;
+            padding: 0 8px;
+        }
+        
+        .create-account-btn {
+            width: 100%;
+            background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+            border: 1px solid #adb1b8;
+            border-radius: 3px;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .create-account-btn:hover {
+            background: linear-gradient(to bottom,#e7eaf0,#d9dce1);
+        }
+        
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #555;
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            margin: 0 10px;
+            color: #0066c0;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: #c45500;
+        }
+    </style>
+</head>
+<body>
+    <div class="amazon-logo">
+        <img src="https://www.amazon.com/logo.svg" alt="Amazon Logo">
+    </div>
+    
+    <div class="login-container">
+        <h1 class="login-title">Accedi</h1>
+        
+        <form>
+            <label for="email" class="input-label">E-mail o numero di cellulare</label>
+            <input type="text" id="email" class="input-field" required>
+            
+            <label for="password" class="input-label">Password</label>
+            <input type="password" id="password" class="input-field" required>
+            
+            <button type="submit" class="continue-btn">Continua</button>
+        </form>
+        
+        <p class="legal-text">
+            Continuando, accetti le <a href="#" class="help-link">Condizioni d'uso</a> e l'<a href="#" class="help-link">Informativa sulla privacy</a> di Amazon.
+        </p>
+        
+        <div class="divider">
+            <span>Nuovo su Amazon?</span>
+        </div>
+        
+        <button class="create-account-btn">Crea il tuo account Amazon</button>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#" class="help-link">Condizioni d'uso</a>
+            <a href="#" class="help-link">Informativa sulla privacy</a>
+            <a href="#" class="help-link">Guida</a>
+        </div>
+        <div>
+            © 1996-2023, Amazon.com, Inc. o società affiliate
+        </div>
+    </footer>
+</body>
+</html>
