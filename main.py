@@ -1,3 +1,7 @@
+from utils import print_logo
+
+print_logo()
+
 def get_ip_info(ip):
     try:
         response = requests.get(f"http://ip-api.com/json/{ip}").json()
