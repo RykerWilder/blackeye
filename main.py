@@ -5,3 +5,6 @@ def main():
 
     while True:
         get_ip_info("ip_address")
+
+if __name__ == "__main__":
+    main()
