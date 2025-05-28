@@ -1,5 +1,8 @@
-from utils import print_logo, get_ip_info
+from utils import print_welcome_message, get_ip_info
 
-print_logo()
+def main():
 
-get_ip_info("ip_address")
+    print_welcome_message()
+
+    while True:
+        get_ip_info("ip_address")
