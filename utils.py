@@ -27,6 +27,6 @@ def get_ip_info(ip):
             "as": response.get("as", "N/A"),
             "isp": response.get("isp", "N/A")
         }
-        return print(ip_data)
+        return ip_data
     except Exception as e:
         print(f"Error retrieving IP information: {e}")
