@@ -1,7 +1,6 @@
 from utils import print_welcome_message, get_ip_info
 
 def main():
-
     print_welcome_message()
 
     while True:
