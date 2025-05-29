@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi a YouTube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .youtube-logo {
+            margin-bottom: 30px;
+        }
+
+        .youtube-logo svg {
+            width: 120px;
+            height: auto;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 32px;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 24px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            color: #202124;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            border-color: #1976d2;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .google-btn {
+            background: #fff;
+            border-color: #dadce0;
+        }
+
+        .google-btn:hover {
+            background: #f8f9fa;
+            border-color: #1976d2;
+        }
+
+        .youtube-btn {
+            background: #ff0000;
+            color: #fff;
+            border-color: #ff0000;
+        }
+
+        .youtube-btn:hover {
+            background: #cc0000;
+            border-color: #cc0000;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .youtube-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #dadce0;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            background: #fff;
+        }
+
+        .form-input:focus {
+            border-color: #1976d2;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            transform: translateY(-32px) scale(0.85);
+            color: #1976d2;
+            background: #fff;
+            padding: 0 8px;
+        }
+
+        .form-label {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 16px;
+            color: #5f6368;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .password-toggle:hover {
+            color: #1976d2;
+        }
+
+        .forgot-password {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-form-btn {
+            width: 100%;
+            padding: 14px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 24px;
+        }
+
+        .login-form-btn:hover {
+            background: #cc0000;
+        }
+
+        .login-form-btn:disabled {
+            background: #e0e0e0;
+            color: #9e9e9e;
+            cursor: not-allowed;
+        }
+
+        .signup-link {
+            margin-top: 24px;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-info {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+            color: #5f6368;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .footer-info a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 24px;
+                margin: 0 16px;
+            }
+            
+            .welcome-text {
+                font-size: 20px;
+            }
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="youtube-logo">
+            <svg viewBox="0 0 176 40" width="176" height="40">
+                <g>
+                    <path fill="#FF0000" d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C0 5.35042 0 10 0 10C0 10 0 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5701 5.35042 27.9727 3.12324Z"/>
+                    <path fill="#FFFFFF" d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z"/>
+                </g>
+                <g>
+                    <path fill="#282828" d="M34.6024 13.0036L31.3945 1.41846H34.1932L35.3174 6.6701C35.6043 7.96361 35.8136 9.06662 35.95 9.97913H36.0323C36.1264 9.32532 36.3381 8.22937 36.665 6.68892L37.8291 1.41846H40.6278L37.3799 13.0036V18.561H34.6001V13.0036H34.6024Z"/>
+                    <path fill="#282828" d="M41.4697 18.1937C40.9053 17.8127 40.5031 17.22 40.2632 16.4157C40.0257 15.6114 39.9058 14.5437 39.9058 13.2078V11.3898C39.9058 10.0422 40.0422 8.95805 40.315 8.14196C40.5878 7.32588 41.0135 6.72851 41.592 6.35457C42.1706 5.98063 42.9302 5.79248 43.871 5.79248C44.7976 5.79248 45.5384 5.98298 46.0981 6.36398C46.6555 6.74497 47.0647 7.34234 47.3234 8.15137C47.5821 8.96275 47.7115 10.0422 47.7115 11.3898V13.2078C47.7115 14.5437 47.5845 15.6161 47.3329 16.4251C47.0812 17.2365 46.672 17.8292 46.1075 18.2031C45.5431 18.5771 44.7764 18.7652 43.8098 18.7652C42.8126 18.7652 42.0342 18.5747 41.4697 18.1937ZM44.6353 16.2323C44.7905 15.8231 44.8705 15.1575 44.8705 14.2309V10.3292C44.8705 9.43077 44.7929 8.77225 44.6353 8.35833C44.4777 7.94206 44.2026 7.7351 43.8074 7.7351C43.4265 7.7351 43.156 7.94206 43.0008 8.35833C42.8432 8.77461 42.7656 9.43077 42.7656 10.3292V14.2309C42.7656 15.1575 42.8408 15.8254 42.9914 16.2323C43.1419 16.6415 43.4123 16.8461 43.8074 16.8461C44.2026 16.8461 44.4777 16.6415 44.6353 16.2323Z"/>
+                    <path fill="#282828" d="M56.8754 18.5634H54.6391V8.40179H54.5548C54.5548 9.25532 54.4595 10.0915 54.2734 10.8978C54.0873 11.7041 53.8328 12.3944 53.5098 12.9686L51.2991 18.5634H49.0628L46.8521 12.9686C46.5314 12.3944 46.2769 11.7041 46.0884 10.8978C45.9023 10.0915 45.8094 9.25532 45.8094 8.40179H45.7251V18.5634H43.4888V5.96811H46.9315L49.2158 11.9982C49.3685 12.7016 49.5354 13.2479 49.7192 13.6394L50.6677 16.073H50.7520L51.7005 13.6394C51.8843 13.2479 52.0512 12.7016 52.2039 11.9982L54.4882 5.96811H57.9309V18.5634H56.8754Z"/>
+                    <path fill="#282828" d="M64.4741 3.68295V7.83846C64.9973 6.38391 65.8219 5.65531 66.9477 5.65531C67.6716 5.65531 68.2268 5.91682 68.6145 6.44219C69.0021 6.96756 69.2443 7.73863 69.3389 8.75395C69.4335 9.76927 69.4812 11.0348 69.4812 12.5596V18.5634H66.9477V12.5596C66.9477 11.5272 66.9477 10.8462 66.9477 10.5165C66.9477 10.1869 66.9243 9.93167 66.8751 9.75001C66.8259 9.56836 66.7579 9.42995 66.6735 9.33479C66.5892 9.23963 66.4861 9.19205 66.3665 9.19205C66.2469 9.19205 66.1508 9.2373 66.0781 9.3278C66.0055 9.4183 65.9492 9.55188 65.9063 9.72854C65.8635 9.9052 65.8352 10.1228 65.8188 10.3847C65.8024 10.6466 65.7953 10.9508 65.7953 11.2972V18.5634H63.2618V3.68295H64.4741Z"/>
+                    <path fill="#282828" d="M80.609 8.0387C80.4373 7.24849 80.1621 6.67699 79.7812 6.32186C79.4002 5.96674 78.8757 5.79035 78.2078 5.79035C77.6904 5.79035 77.2059 5.93616 76.7567 6.22778C76.3075 6.51939 75.9594 6.90747 75.7148 7.39202C75.4702 7.87657 75.3479 8.21547 75.3479 8.40871V8.7335C75.3479 9.0516 75.4496 9.5308 75.6506 10.1711C75.8516 10.8114 76.1479 11.4517 76.5394 12.092L79.509 16.9814C79.9419 17.7477 80.3262 18.3984 80.6618 18.9337C81.0001 19.469 81.2454 19.8026 81.4009 19.9343C81.5565 20.066 81.6526 20.1318 81.6908 20.1318C81.7666 20.1318 81.8707 20.021 82.0007 19.7995C82.1307 19.578 82.2914 19.2656 82.4828 18.8623C82.6742 18.459 82.8963 17.9648 83.1492 17.3797L86.0699 9.0516C86.2218 8.67334 86.2975 8.36459 86.2975 8.12535C86.2975 7.91266 86.2465 7.71942 86.1445 7.54563C86.0425 7.37184 85.8919 7.21981 85.6927 7.08953C85.4935 6.95925 85.2457 6.84411 84.9492 6.74411C84.6527 6.64411 84.3075 6.59411 83.9136 6.59411C83.4055 6.59411 82.9563 6.71364 82.566 6.9527C82.1758 7.19177 81.8444 7.55224 81.572 8.03411C81.2996 8.51598 81.1007 9.12234 80.9851 9.85319L78.63 8.9894C78.6300 8.99176 78.6276 8.97411 78.6228 8.93646C78.6180 8.89881 78.6156 8.86116 78.6156 8.82351C78.6156 8.78586 78.6204 8.74821 78.63 8.71056C78.6396 8.67291 78.6491 8.63761 78.6587 8.60466C78.6683 8.57171 78.6827 8.53641 78.7019 8.49876C78.7211 8.46111 78.7451 8.42581 78.7739 8.39286C78.8027 8.35992 78.8363 8.32932 78.8747 8.30106C78.9131 8.2728 78.9563 8.24689 79.0043 8.22333C79.0523 8.19977 79.1051 8.17856 79.1627 8.15969C79.2203 8.14082 79.2827 8.12429 79.3499 8.11011C79.4171 8.09593 79.4891 8.08409 79.5659 8.07459C79.6427 8.06509 79.7243 8.06034 79.8107 8.06034C80.0595 8.06034 80.2703 8.11722 80.4431 8.23097C80.6159 8.34473 80.7507 8.51137 80.8475 8.73088C80.9443 8.95039 81.0007 9.21875 81.0167 9.53597C81.0327 9.85319 81.0095 10.2082 80.9471 10.6011L80.609 8.0387Z"/>
+                </g>
+            </svg>
+        </div>
+
+        <h1 class="welcome-text">Accedi a YouTube</h1>
+        <p class="subtitle">Continua con il tuo account Google</p>
+
+        <div class="main-options">
+            <div class="login-options">
+                <button class="login-btn google-btn" onclick="showGoogleLogin()">
+                    <svg class="google-icon" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Continua con Google
+                </button>
+
+                <button class="login-btn youtube-btn" onclick="showEmailLogin()">
+                    <svg class="youtube-icon" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    Accedi con Email
+                </button>
+            </div>
+
+            <div class="divider">
+                <span>oppure</span>
+            </div>
+
+            <div class="form-container" id="emailForm">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="email" class="form-input" placeholder=" " required id="emailInput">
+                            <label class="form-label">Email o nome utente</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="password" class="form-input" placeholder=" " required id="passwordInput">
+                            <label class="form-label">Password</label>
+                            <button type="button" class="password-toggle" onclick="togglePassword()">Mostra</button>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right; margin-bottom: 20px;">
+                        <a href="#" class="forgot-password">Password dimenticata?</a>
+                    </div>
+
+                    <button type="submit" class="login-form-btn">Accedi</button>
+                </form>
+            </div>
+
+            <div class="signup-link">
+                Non hai un account? <a href="#">Registrati gratuitamente</a>
+            </div>
+
+            <div class="footer-info">
+                Accedendo accetti i <a href="#">Termini di servizio</a> e l'<a href="#">Informativa sulla privacy</a> di YouTube e Google.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showGoogleLogin() {
+            alert('Questa è una demo. Reindirizzamento al login Google...');
+        }
+
+        function showEmailLogin() {
+            const formContainer = document.getElementById('emailForm');
+            const loginOptions = document.querySelector('.login-options');
+            const divider = document.querySelector('.divider');
+            
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+                loginOptions.style.display = 'none';
+                divider.style.display = 'none';
+            } else {
+                formContainer.style.display = 'none';
+                loginOptions.style.display = 'flex';
+                divider.style.display = 'flex';
+            }
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const toggleBtn = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'Nascondi';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'Mostra';
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            if (email && password) {
+                alert('Questa è solo una demo. Credenziali inserite:\nEmail: ' + email + '\nPassword: ' + password);
+            }
+        }
+
+        // Gestione floating labels
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.classList.remove('has-value');
+                } else {
+                    this.classList.add('has-value');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
