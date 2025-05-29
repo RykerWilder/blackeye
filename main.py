@@ -6,6 +6,7 @@ import subprocess
 import socket
 import atexit
 import time
+from colorama import Fore, Style
 
 load_dotenv()
 
@@ -29,21 +30,19 @@ def is_port_in_use(port):
 def start_ngrok():
     global server_process, ngrok_tunnel
     
-    # Prima ferma eventuali processi esistenti
     cleanup()
     
     if is_port_in_use(8000):
-        print("Porta 8000 già in uso! Provando con una porta alternativa...")
+        print(f"{Fore.YELLOW}Port 8000 already in use! Trying an alternative port...{Style.RESET_ALL}")
         port = find_available_port(8000)
         if port is None:
-            print("Nessuna porta disponibile trovata")
+            print(f"{Fore.RED}No available ports found{Style.RESET_ALL}")
             return None
     else:
         port = 8000
     
     server_process = subprocess.Popen(["python", "-m", "http.server", str(port)])
     
-    # Configura ngrok
     try:
         ngrok.set_auth_token(os.getenv("NGROK_AUTHTOKEN"))
         ngrok_tunnel = ngrok.connect(str(port), proto="http", bind_tls=True)
@@ -51,7 +50,7 @@ def start_ngrok():
         atexit.register(cleanup)
         return public_url
     except Exception as e:
-        print(f"Errore ngrok: {e}")
+        print(f"{Fore.RED}ngrok error: {e}{Style.RESET_ALL}")
         cleanup()
         return None
 
@@ -81,25 +80,25 @@ def main():
     for key, value in sites.items():
         print(f"[{key}] {value['name']}")
 
-    choice = input("\nInsert your choice: ")
+    choice = input("Insert your choice: ")
 
     if choice in sites:
         selected = sites[choice]
-        print(f"\nYou choose {selected['name']}")
+        print(f"You choose {Fore.BLUE}{selected['name']}{Style.RESET_ALL}")
         
         public_url = start_ngrok()
         if public_url:
-            print(f"\nPublic URL: {public_url}")
-            print(f"Local URL: http://localhost:8000/{selected['html']}")
-            print("\nPress Ctrl+C to stop the server")
+            print(f"Public URL: {public_url}")
+            print(f"Local URL:{Fore.BLUE} http://localhost:8000/{selected['html']}{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}Press Ctrl+C to stop the server{Style.RESET_ALL}")
             
             try:
                 while True:
                     time.sleep(1)
             except KeyboardInterrupt:
-                print("\nStopping server...")
+                print(f"{Fore.YELLOW}Stopping server...{Style.RESET_ALL}")
         else:
-            print("Impossibile avviare il server")
+            print(f"{Fore.RED}Unable to start server{Style.RESET_ALL}")
     else:
         print("Invalid choice")
 
@@ -107,6 +106,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(f"Errore: {e}")
+        print(f"{Fore.RED}error: {e}{Style.RESET_ALL}")
     finally:
         cleanup()
