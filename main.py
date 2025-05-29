@@ -11,6 +11,8 @@ sites = {
 }
 
 def start_ngrok():
+    ngrok_tunnel = ngrok.connect('8000')
+    return ngrok_tunnel.public_url
 
 
 def main():
