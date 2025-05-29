@@ -76,7 +76,6 @@ def cleanup():
 def main():
     print_welcome_message()
 
-    # Stampa tutte le opzioni disponibili
     for key, value in sites.items():
         print(f"[{key}] {value['name']}")
 
