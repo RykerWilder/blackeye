@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi al tuo account PayPal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f7f9fa;
+            color: #2c2e2f;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #cbd2d6;
+            padding: 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+        }
+
+        .paypal-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .paypal-logo svg {
+            width: 100px;
+            height: 32px;
+        }
+
+        .help-link {
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #2c2e2f;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: #6c7378;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c2e2f;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd2d6;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #2c2e2f;
+            background-color: #fff;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0070ba;
+            box-shadow: 0 0 0 2px rgba(0, 112, 186, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #d73027;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #0070ba;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-input {
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #6c7378;
+            line-height: 1.4;
+        }
+
+        .login-button {
+            width: 100%;
+            background-color: #0070ba;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .login-button:hover {
+            background-color: #005ea6;
+        }
+
+        .login-button:disabled {
+            background-color: #cbd2d6;
+            cursor: not-allowed;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 32px 0;
+            position: relative;
+            color: #6c7378;
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #cbd2d6;
+        }
+
+        .divider span {
+            background-color: #fff;
+            padding: 0 16px;
+        }
+
+        .signup-button {
+            width: 100%;
+            background-color: transparent;
+            color: #0070ba;
+            border: 1px solid #0070ba;
+            border-radius: 24px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .signup-button:hover {
+            background-color: #f0f6ff;
+        }
+
+        .footer {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 24px;
+            border-top: 1px solid #cbd2d6;
+            background-color: #fff;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #6c7378;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c7378;
+            font-size: 12px;
+        }
+
+        .language-selector select {
+            background: none;
+            border: none;
+            color: #6c7378;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .security-info {
+            background-color: #f0f6ff;
+            border: 1px solid #c9e3ff;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #2c2e2f;
+        }
+
+        .security-info-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: text-top;
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 12px 16px;
+            }
+            
+            .main-container {
+                margin: 20px auto;
+                padding: 0 16px;
+            }
+            
+            .login-card {
+                padding: 24px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        .error-message {
+            color: #d73027;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="paypal-logo">
+                <svg viewBox="0 0 100 32" width="100" height="32">
+                    <path fill="#003087" d="M12 4.917v.583c0 1.11-.892 2.007-1.99 2.007H6l-.39 2.48h2.84c1.284 0 2.34 1.018 2.42 2.297.09 1.4-.99 2.583-2.42 2.583H6l-.55 3.5H2.42L4.49 4.917H12z"/>
+                    <path fill="#0070ba" d="M35.8 12.687c0 2.3-1.9 4.2-4.2 4.2s-4.2-1.9-4.2-4.2 1.9-4.2 4.2-4.2 4.2 1.9 4.2 4.2z"/>
+                    <path fill="#003087" d="M25.4 4.917c3.9 0 7.1 3.2 7.1 7.1s-3.2 7.1-7.1 7.1H15L17.83 4.917h7.57z"/>
+                    <path fill="#0070ba" d="M43.23 4.917L41.16 19.13h-3.04l.39-2.48c-.78 1.48-2.34 2.48-4.1 2.48-2.3 0-4.2-1.9-4.2-4.2 0-2.3 1.9-4.2 4.2-4.2 1.76 0 3.32 1 4.1 2.48l.39-2.48h3.04l-1.67 10.63z"/>
+                    <path fill="#0070ba" d="M56.77 4.917L54.7 19.13h-3.04l.39-2.48c-.78 1.48-2.34 2.48-4.1 2.48-2.3 0-4.2-1.9-4.2-4.2 0-2.3 1.9-4.2 4.2-4.2 1.76 0 3.32 1 4.1 2.48l.39-2.48h3.04l-1.67 10.63z"/>
+                    <path fill="#003087" d="M68.77 8.487L67.1 19.13h-3.04l1.67-10.64h3.04zm1.56-3.57c0 .86-.7 1.56-1.56 1.56s-1.56-.7-1.56-1.56.7-1.56 1.56-1.56 1.56.7 1.56 1.56z"/>
+                    <path fill="#003087" d="M79.33 8.487L77.66 19.13h-3.04l1.67-10.64h3.04z"/>
+                </svg>
+            </div>
+            <a href="#" class="help-link">Serve aiuto?</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">Accedi al tuo account</h1>
+                <p class="login-subtitle">Benvenuto di nuovo</p>
+            </div>
+
+            <div class="security-info">
+                <svg class="security-info-icon" viewBox="0 0 16 16" fill="#0070ba">
+                    <path d="M8 1l5.25 2.75v4.5c0 3.45-2.1 6.3-5.25 7.75C4.85 14.55 2.75 11.7 2.75 8.25v-4.5L8 1z"/>
+                    <path d="M7 10V6h2v4H7zm0 2v2h2v-2H7z" fill="#fff"/>
+                </svg>
+                Manteniamo al sicuro le tue informazioni finanziarie con la crittografia avanzata.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email" class="form-label">Indirizzo email o numero di cellulare</label>
+                    <input type="email" id="email" class="form-input" placeholder="Inserisci la tua email" required>
+                    <div class="error-message" id="emailError">Inserisci un indirizzo email valido.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-input" placeholder="Inserisci la password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">Mostra</button>
+                    </div>
+                    <div class="error-message" id="passwordError">La password è obbligatoria.</div>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="stayLoggedIn" class="checkbox-input">
+                    <label for="stayLoggedIn" class="checkbox-label">
+                        Rimani connesso per velocizzare il checkout. Puoi disattivare questa opzione in qualsiasi momento. 
+                        <a href="#" style="color: #0070ba;">Ulteriori informazioni</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="login-button">Accedi</button>
+            </form>
+
+            <div class="forgot-password">
+                <a href="#">Problemi ad accedere?</a>
+            </div>
+
+            <div class="divider">
+                <span>o</span>
+            </div>
+
+            <button type="button" class="signup-button" onclick="showSignup()">
+                Registrati
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Contattaci</a>
+                <a href="#">Privacy</a>
+                <a href="#">Note legali</a>
+                <a href="#">Commissioni PayPal</a>
+                <a href="#">Risoluzione problemi</a>
+            </div>
+            <div class="language-selector">
+                🌐
+                <select>
+                    <option>Italiano</option>
+                    <option>English</option>
+                    <option>Español</option>
+                    <option>Français</option>
+                    <option>Deutsch</option>
+                </select>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'Nascondi';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'Mostra';
+            }
+        }
+
+        function showSignup() {
+            alert('Questa è una demo. Reindirizzamento alla pagina di registrazione PayPal...');
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(inputId, errorId, message) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            
+            input.classList.add('error');
+            error.textContent = message;
+            error.style.display = 'block';
+        }
+
+        function hideError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            
+            input.classList.remove('error');
+            error.style.display = 'none';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.querySelector('.login-button');
+            
+            // Reset errors
+            hideError('email', 'emailError');
+            hideError('password', 'passwordError');
+            
+            let hasErrors = false;
+            
+            // Validate email
+            if (!email) {
+                showError('email', 'emailError', 'L\'indirizzo email è obbligatorio.');
+                hasErrors = true;
+            } else if (!validateEmail(email)) {
+                showError('email', 'emailError', 'Inserisci un indirizzo email valido.');
+                hasErrors = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                showError('password', 'passwordError', 'La password è obbligatoria.');
+                hasErrors = true;
+            } else if (password.length < 8) {
+                showError('password', 'passwordError', 'La password deve contenere almeno 8 caratteri.');
+                hasErrors = true;
+            }
+            
+            if (!hasErrors) {
+                // Simulate loading
+                loginButton.textContent = 'Accesso in corso...';
+                loginButton.disabled = true;
+                document.body.classList.add('loading');
+                
+                setTimeout(() => {
+                    alert('Questa è solo una demo. Credenziali inserite:\nEmail: ' + email + '\nPassword: ' + '*'.repeat(password.length));
+                    
+                    // Reset button
+                    loginButton.textContent = 'Accedi';
+                    loginButton.disabled = false;
+                    document.body.classList.remove('loading');
+                }, 2000);
+            }
+        });
+
+        // Real-time validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            if (email && !validateEmail(email)) {
+                showError('email', 'emailError', 'Inserisci un indirizzo email valido.');
+            } else if (email) {
+                hideError('email', 'emailError');
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            if (this.value) {
+                hideError('password', 'passwordError');
+            }
+        });
+    </script>
+</body>
+</html>

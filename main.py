@@ -17,7 +17,7 @@ sites = {
     "4": {"name": "LinkedIn", "html": "apps/linkedin/linkedin.html", "redirect": "https://linkedin.com"},
     "5": {"name": "YouTube", "html": "apps/youtube/youtube.html", "redirect": "https://youtube.com"},
     "6": {"name": "Netflix", "html": "apps/netflix/netflix.html", "redirect": "https://netflix.com"},
-    "7": {"name": "PayPal", "html": "apps/paypal/paypal.html", "redirect": "https://paypal.com"},
+    "7": {"name": "PayPal", "html": "apps/paypal/paypal.html", "redirect": "https://paypal.com"}
 }
 
 server_process = None
