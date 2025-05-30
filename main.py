@@ -46,7 +46,7 @@ def start_ngrok():
     try:
         ngrok.set_auth_token(os.getenv("NGROK_AUTHTOKEN"))
         ngrok_tunnel = ngrok.connect(str(port), proto="http", bind_tls=True)
-        public_url = ngrok_tunnel.url()  # Modificato per la nuova API ngrok
+        public_url = ngrok_tunnel.url()
         atexit.register(cleanup)
         return public_url
     except Exception as e:
@@ -89,7 +89,7 @@ def main():
         if public_url:
             print(f"{Fore.BLUE}[INFO]{Style.RESET_ALL}Public URL: {public_url}")
             print(f"{Fore.BLUE}[INFO]{Style.RESET_ALL}Local URL:{Fore.BLUE} http://localhost:8000/{selected['html']}{Style.RESET_ALL}")
-            print(f"{Fore.YELLOW}Press Ctrl+C to stop the server{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}[!]Press Ctrl+C to stop the server{Style.RESET_ALL}")
             
             try:
                 while True:
