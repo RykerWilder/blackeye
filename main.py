@@ -33,10 +33,10 @@ def start_ngrok():
     cleanup()
     
     if is_port_in_use(8000):
-        print(f"{Fore.YELLOW}Port 8000 already in use! Trying an alternative port...{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}[!]Port 8000 already in use! Trying an alternative port...{Style.RESET_ALL}")
         port = find_available_port(8000)
         if port is None:
-            print(f"{Fore.RED}No available ports found{Style.RESET_ALL}")
+            print(f"{Fore.RED}[X]No available ports found{Style.RESET_ALL}")
             return None
     else:
         port = 8000
@@ -50,7 +50,7 @@ def start_ngrok():
         atexit.register(cleanup)
         return public_url
     except Exception as e:
-        print(f"{Fore.RED}ngrok error: {e}{Style.RESET_ALL}")
+        print(f"{Fore.RED}[X]Ngrok error: {e}{Style.RESET_ALL}")
         cleanup()
         return None
 
@@ -79,32 +79,32 @@ def main():
     for key, value in sites.items():
         print(f"[{key}] {value['name']}")
 
-    choice = input("Insert your choice: ")
+    choice = input(f"{Fore.GREEN}[?]Insert your choice => {Style.RESET_ALL}")
 
     if choice in sites:
         selected = sites[choice]
-        print(f"You choose {Fore.BLUE}{selected['name']}{Style.RESET_ALL}")
+        print(f"{Fore.BLUE}[INFO]{Style.RESET_ALL}You choose {Fore.BLUE}{selected['name']}{Style.RESET_ALL}")
         
         public_url = start_ngrok()
         if public_url:
-            print(f"Public URL: {public_url}")
-            print(f"Local URL:{Fore.BLUE} http://localhost:8000/{selected['html']}{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}[INFO]{Style.RESET_ALL}Public URL: {public_url}")
+            print(f"{Fore.BLUE}[INFO]{Style.RESET_ALL}Local URL:{Fore.BLUE} http://localhost:8000/{selected['html']}{Style.RESET_ALL}")
             print(f"{Fore.YELLOW}Press Ctrl+C to stop the server{Style.RESET_ALL}")
             
             try:
                 while True:
                     time.sleep(1)
             except KeyboardInterrupt:
-                print(f"{Fore.YELLOW}Stopping server...{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}[!]Stopping server...{Style.RESET_ALL}")
         else:
-            print(f"{Fore.RED}Unable to start server{Style.RESET_ALL}")
+            print(f"{Fore.RED}[X]Unable to start server{Style.RESET_ALL}")
     else:
-        print("Invalid choice")
+        print(f"{Fore.RED}[X]Invalid choice{Style.RESET_ALL}")
 
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(f"{Fore.RED}error: {e}{Style.RESET_ALL}")
+        print(f"{Fore.RED}[X]Error: {e}{Style.RESET_ALL}")
     finally:
         cleanup()
