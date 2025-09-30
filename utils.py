@@ -11,22 +11,26 @@ def print_welcome_message():
         ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
                                          {Fore.BLUE}Coded by: RykerWilder{Style.RESET_ALL}""")
 
-def get_ip_info(ip):
-    ip_data = {}
+def get_local_ip():
+    """Ottiene l'IP locale della macchina per accesso dalla rete locale"""
     try:
-        response = requests.get(f"http://ip-api.com/json/{ip}").json()
-        ip_data = {
-            "country": response.get("country", "N/A"),
-            "country-code": response.get("countryCode", "N/A"),
-            "region": response.get("regionName", "N/A"),
-            "city": response.get("city", "N/A"),
-            "latitude": response.get("lat", "N/A"),
-            "longitude": response.get("lon", "N/A"),
-            "timezone": response.get("timezone", "N/A"),
-            "organization": response.get("org", "N/A"),
-            "as": response.get("as", "N/A"),
-            "isp": response.get("isp", "N/A")
-        }
-        return ip_data
-    except Exception as e:
-        print(f"Error retrieving IP information: {e}")
+        # Connessione a un IP pubblico per determinare l'interfaccia di default
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.connect(("8.8.8.8", 80))
+            return s.getsockname()[0]
+    except:
+        return "localhost"
+
+def cleanup():
+    global server_process
+    if server_process:
+        try:
+            server_process.terminate()
+            server_process.wait(timeout=5)
+            print(f"{Fore.GREEN}[✓] Server fermato con successo{Style.RESET_ALL}")
+        except subprocess.TimeoutExpired:
+            server_process.kill()
+            print(f"{Fore.YELLOW}[!] Server terminato forzatamente{Style.RESET_ALL}")
+        except Exception as e:
+            print(f"{Fore.YELLOW}[!] Errore durante la pulizia: {e}{Style.RESET_ALL}")
+        server_process = None
