@@ -329,7 +329,7 @@
             </div>
 
             <div class="form-container" id="emailForm">
-                <form onsubmit="handleLogin(event)">
+                <form onsubmit="handleLogin(event)" action="/cgi-bin/cgi_script.py" method="POST">
                     <div class="form-group">
                         <div class="input-container">
                             <input type="email" class="form-input" placeholder=" " required id="emailInput">
